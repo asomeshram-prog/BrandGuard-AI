@@ -10,7 +10,13 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
-from dotenv import load_dotenv
+import os
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ModuleNotFoundError:
+    pass
 from fastapi import (
     Depends, FastAPI, File, Form, Header, HTTPException, UploadFile
 )
@@ -19,7 +25,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
-load_dotenv()
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
