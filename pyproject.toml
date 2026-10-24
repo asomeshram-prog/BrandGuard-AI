@@ -1,3 +1,16 @@
 
+[project]
+name = "brandguard-ai"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "python-dotenv",
+    "python-multipart",
+    "pypdf",
+    "groq"
+]
+
 [tool.vercel]
 entrypoint = "backend.main:app"
