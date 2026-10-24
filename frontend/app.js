@@ -5,7 +5,7 @@
 
 // IMPORTANT: Replace this with your actual Render backend URL.
 // Example: https://brandguard-ai-api.onrender.com
-const API_BASE_URL = "https://brandguard-ai-frontend.vercel.app/";
+const API_BASE_URL = "https://brandguard-ai-vpu4.onrender.com";
 
 /* ---------- State and helpers ---------- */
 
