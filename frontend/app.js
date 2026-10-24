@@ -1,3 +1,38 @@
+
+const API_BASE_URL = "brandguard-ai-frontend.vercel.app";
+
+const api = async (path, opts = {}) => {
+  const headers = {
+    ...(opts.headers || {}),
+    ...(token ? { Authorization: "Bearer " + token } : {})
+  };
+
+  const cleanPath = path.replace(/^\/+/, "");
+  const url = `${API_BASE_URL.replace(/\/+$/, "")}/${cleanPath}`;
+
+  const response = await fetch(url, {
+    ...opts,
+    headers
+  });
+
+  let data = {};
+
+  try {
+    data = await response.json();
+  } catch {}
+
+  if (!response.ok) {
+    throw new Error(
+      data.detail || `Request failed (${response.status})`
+    );
+  }
+
+  return data;
+};
+
+
+
+
 const $=id=>document.getElementById(id);
 let token=localStorage.getItem('bg_token')||'', reviews=[], activeId=null;
 const api=async(path,opts={})=>{opts.headers={...(opts.headers||{}),...(token?{Authorization:'Bearer '+token}:{})};const r=await fetch(path,opts);let data={};try{data=await r.json()}catch{}if(!r.ok)throw new Error(data.detail||'Something went wrong');return data};
