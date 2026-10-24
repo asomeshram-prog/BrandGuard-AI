@@ -66,14 +66,16 @@ CORS_ORIGINS = [
     if origin.strip()
 ]
 
-app = FastAPI(
-    @app.get("/api/health")
+
+app = FastAPI(title="BrandGuard AI", version="1.0.0")
+
+
+@app.get("/api/health")
 def health():
     return {
         "status": "ok",
         "service": "BrandGuard AI"
     }
-)
 
 app.add_middleware(
     CORSMiddleware,
