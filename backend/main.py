@@ -21,10 +21,21 @@ from starlette.concurrency import run_in_threadpool
 
 load_dotenv()
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-FRONTEND_DIR = BASE_DIR / "frontend"
-DB_DIR = Path(os.getenv("BRANDGUARD_DB_DIR", str(BASE_DIR / "database"))).resolve()
-UPLOAD_DIR = Path(os.getenv("BRANDGUARD_UPLOAD_DIR", str(BASE_DIR / "uploads"))).resolve()
+
+# Vercel functions need writable temporary storage.
+if os.getenv("VERCEL"):
+    DB_DIR = Path("/tmp/database")
+    UPLOAD_DIR = Path("/tmp/uploads")
+else:
+    DB_DIR = BASE_DIR / "database"
+    UPLOAD_DIR = BASE_DIR / "uploads"
+
+DB_DIR.mkdir(parents=True, exist_ok=True)
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+DB_PATH = DB_DIR / "brandguard.db"
 
 DB_DIR.mkdir(parents=True, exist_ok=True)
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
