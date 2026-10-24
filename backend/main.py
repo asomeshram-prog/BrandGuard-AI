@@ -61,9 +61,12 @@ CORS_ORIGINS = [
 ]
 
 app = FastAPI(
-    title="BrandGuard AI",
-    version="1.1.0",
-    description="AI-assisted brand compliance review API"
+    @app.get("/api/health")
+def health():
+    return {
+        "status": "ok",
+        "service": "BrandGuard AI"
+    }
 )
 
 app.add_middleware(
